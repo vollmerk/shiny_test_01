@@ -1,0 +1,29 @@
+---
+author: Dan Kelley
+title: Tides in Minas Basin
+date: 2019 Aug 15
+---
+
+Google maps suggests that the centre of Minas Basin is near
+```{r}
+lon <- -64.18
+lat <- 45.31
+```
+
+An estimate of the relevant tidal constituents may be found using the WebTide
+database, as follows.
+
+```{r}
+dir <- "/usr/local/WebTide/data/nwatl/"
+nod <- read.table(paste0(dir, "nwatl_ll.nod"), header=FALSE)
+fac <- 1 / cos(lat * pi / 180) # account for meridional convergence
+closest <- nod[which.min((lon-nod$V2)^2*fac^2+(lat-nod$V3)^2),1]
+O1<-read.table(paste0(dir, "O1.barotropic.s2c"), header=FALSE, skip=3)[closest, 2]
+K1<-read.table(paste0(dir, "K1.barotropic.s2c"), header=FALSE, skip=3)[closest, 2]
+N2<-read.table(paste0(dir, "N2.barotropic.s2c"), header=FALSE, skip=3)[closest, 2]
+M2<-read.table(paste0(dir, "M2.barotropic.s2c"), header=FALSE, skip=3)[closest, 2]
+S2<-read.table(paste0(dir, "S2.barotropic.s2c"), header=FALSE, skip=3)[closest, 2]
+```
+with results O1$=`r O1`$m, K1$=`r K1`$m, N2$=`r N2`$m, M2$=`r M2`$m, and S2$=`r S2`$m.
+
+

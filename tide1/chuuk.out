@@ -1,0 +1,35 @@
+Loading required package: testthat
+Loading required package: gsw
+Warning message:
+converting amplitude from metres to feet
+ 
+Warning message:
+In as.tidem(tRef = tRef, latitude = lat, name = T$name, amplitude = T$amp,  :
+  the following constituents are not handled: 'M1'
+
+tidem summary
+-------------
+
+Supplied Model:
+       Freq Amplitude Phase
+J1  0.04329   0.00939   127
+K1  0.04178   0.18434   229
+K2  0.08356   0.02811   291
+L2  0.08202   0.00173   104
+M2  0.08051   0.07308   126
+M3  0.12077   0.00434    25
+N2  0.07900   0.01665   314
+2N2 0.07749   0.00219   144
+O1  0.03873   0.11484   231
+P1  0.04155   0.06081   269
+Q1  0.03722   0.02132   351
+2Q1 0.03571   0.00273   109
+R2  0.08345   0.00113   130
+S1  0.04167   0.00284   225
+S2  0.08333   0.10479   147
+T2  0.08322   0.00610   339
+* Processing Log
+    - 2019-08-17 18:11:31.730 UTC: `create 'tidem' object`
+    - 2019-08-17 18:11:31.731 UTC: `as.tidem(tRef = tRef, latitude = lat, name = T$name, amplitude = T$amp,     phase = T$phase)`
+null device 
+          1 
