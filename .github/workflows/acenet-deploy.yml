@@ -11,7 +11,7 @@ jobs:
       mkdir -p ~/.ssh/
       ssh-keyscan -H services.dal.ace-net.ca >> ~/.ssh/known_hosts
       ssh-agent bash -c 'ssh-add - <<< "${{ secrets.ACENET_KEY }}"'
-      ssh -vvv -i ~/.ssh/acenet.key $SSH_USER@services.dal.ace-net.ca /opt/docker-deploy/trigger-push
+      ssh -vvv $SSH_USER@services.dal.ace-net.ca /opt/docker-deploy/trigger-push
      shell: bash
      env:
       SSH_USER: ${{ secrets.ACENET_USER }}
