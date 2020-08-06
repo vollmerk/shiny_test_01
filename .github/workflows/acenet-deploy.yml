@@ -9,13 +9,12 @@ jobs:
    - name: Create and Deploy
      run: |
       mkdir -p ~/.ssh/
-      cat <<EOF > ../acenet.key
+      cat <<EOF > ~/.ssh/acenet.key
       ${{ secrets.ACENET_KEY }}
       EOF
-      sudo chmod 600 ../acenet.key
+      sudo chmod 600 ~/.ssh/acenet.key
       ssh-keyscan -H services.dal.ace-net.ca >> ~/.ssh/known_hosts
-      ssh -o HostKeyAlgorithms=ecdsa-sha2-nistp256 -i $SSH_KEY_PATH $SSH_USER@services.dal.ace-net.ca /opt/docker-deploy/trigger-push
+      ssh -vvv -i ~/.ssh/acenet.key $SSH_USER@services.dal.ace-net.ca /opt/docker-deploy/trigger-push
      shell: bash
      env:
-      SSH_KEY_PATH: ${{ github.workspace }}/../acenet.key
       SSH_USER: ${{ secrets.ACENET_USER }}
