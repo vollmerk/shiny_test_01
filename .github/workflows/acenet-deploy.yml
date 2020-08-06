@@ -6,7 +6,7 @@ jobs:
   name: SSH-Trigger
   runs-on: ubuntu-latest
   steps:
-   - name: Create SSH Key
+   - name: Create and Deploy
      run: |
       mkdir -p ~/.ssh/
       cat <<EOF > ../acenet.key
@@ -14,10 +14,9 @@ jobs:
       EOF
       sudo chmod 600 ../acenet.key
       echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+      ssh -i $SSH_KEY_PATH $SSH_USER@services.dal.ace-net.ca /opt/docker-deploy/trigger-push
      shell: bash
      env:
       SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
       SSH_KEY_PATH: ${{ github.workspace }}/../acenet.key
       SSH_USER: ${{ secrets.ACENET_USER }}
-   - name: 'Execute Trigger'
-     run: ssh -i $SSH_KEY_PATH $SSH_USER@services.dal.ace-net.ca /opt/docker-deploy/trigger-push
