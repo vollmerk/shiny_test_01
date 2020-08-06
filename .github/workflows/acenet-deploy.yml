@@ -9,11 +9,8 @@ jobs:
    - name: Create and Deploy
      run: |
       mkdir -p ~/.ssh/
-      cat <<EOF > ~/.ssh/acenet.key
-      ${{ secrets.ACENET_KEY }}
-      EOF
-      sudo chmod 600 ~/.ssh/acenet.key
       ssh-keyscan -H services.dal.ace-net.ca >> ~/.ssh/known_hosts
+      ssh-agent bash -c 'ssh-add - <<< "${{ secrets.ACENET_KEY }}"'
       ssh -vvv -i ~/.ssh/acenet.key $SSH_USER@services.dal.ace-net.ca /opt/docker-deploy/trigger-push
      shell: bash
      env:
