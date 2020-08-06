@@ -14,7 +14,7 @@ jobs:
       EOF
       sudo chmod 600 ../acenet.key
       ssh-keyscan -H services.dal.ace-net.ca >> ~/.ssh/known_hosts
-      ssh -i $SSH_KEY_PATH $SSH_USER@services.dal.ace-net.ca /opt/docker-deploy/trigger-push
+      ssh -o HostKeyAlgorithms=ecdsa-sha2-nistp256 -i $SSH_KEY_PATH $SSH_USER@services.dal.ace-net.ca /opt/docker-deploy/trigger-push
      shell: bash
      env:
       SSH_KEY_PATH: ${{ github.workspace }}/../acenet.key
